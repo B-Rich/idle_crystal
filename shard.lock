@@ -1,0 +1,6 @@
+version: 1.0
+shards:
+  ncurses:
+    github: jreinert/ncurses-crystal
+    commit: c08c129748851d9102b7d7798f67eb3cae3c9fcd
+

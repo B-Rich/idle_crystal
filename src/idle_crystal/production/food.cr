@@ -1,6 +1,7 @@
 require "./abstract"
 
 class IdleCrystal::Production::Food < IdleCrystal::Production::Abstract
-  def initialize
+  def file_path
+    File.join(["data", "food.yml"])
   end
 end

@@ -1,0 +1,6 @@
+- name: Cutter
+  production: 1
+  cost:
+    food: 0.2
+    wood: 0.2
+  coeff: 1.1

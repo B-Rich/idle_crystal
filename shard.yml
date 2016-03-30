@@ -5,3 +5,7 @@ authors:
   - Aleksander Kwiatkowski <bobikx@poczta.fm>
 
 license: MIT
+
+dependencies:
+  ncurses:
+    github: jreinert/ncurses-crystal
