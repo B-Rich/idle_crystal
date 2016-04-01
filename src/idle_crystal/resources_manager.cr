@@ -3,8 +3,9 @@ require "./resource_pack"
 class IdleCrystal::ResourcesManager
   def initialize
     @resources_pack = IdleCrystal::ResourcePack.new
-    @resources_pack.volume("food", 10.0)
-    @resources_pack.volume("wood", 10.0)
+    @resources_pack.volume("work_force", 3.0)
+    @resources_pack.volume("food", 5.0)
+    @resources_pack.volume("wood", 3.0)
 
     @production_resources_pack = IdleCrystal::ResourcePack.new
   end

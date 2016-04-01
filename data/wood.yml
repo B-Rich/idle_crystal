@@ -4,6 +4,16 @@
     food: 0.2
     wood: 0.2
   produce:
-    wood: 0.6     
+    wood: 0.6
   coeff: 1.1
   build_key: c
+
+- name: Forest
+  production: 1
+  cost:
+    food: 0.5
+    wood: 10.0
+  produce:
+    wood: 2.0
+  coeff: 1.1
+  build_key: f

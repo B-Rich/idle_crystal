@@ -1,6 +1,7 @@
 require "./production/abstract"
 require "./production/food"
 require "./production/wood"
+require "./production/work_force"
 require "yaml"
 
 class IdleCrystal::ProductionManager
@@ -8,11 +9,12 @@ class IdleCrystal::ProductionManager
     @resource_manager = rm
     @resources = {
       "food" => IdleCrystal::Production::Food.new,
-      "wood" => IdleCrystal::Production::Wood.new
+      "wood" => IdleCrystal::Production::Wood.new,
+      "work_force" => IdleCrystal::Production::WorkForce.new,
     }
   end
 
-  getter :resources
+  getter :resources, :resource_manager
 
   def build(building : IdleCrystal::Production::ProductionBuilding)
     cost_for_next = building.cost_for_next

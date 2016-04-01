@@ -3,14 +3,11 @@ require "../resource_pack"
 class IdleCrystal::Production::ProductionBuilding
   def initialize(h : YAML::Any)
     @name = h["name"]
-    @production = h["production"].to_s.to_i
     @cost = h["cost"].as_h
     @produce = h["produce"].as_h
     @coeff = h["coeff"].to_s.to_f
     @amount = 0 as Int32
     @build_key = h["build_key"].to_s[0]
-
-    puts @cost.inspect
   end
 
   def cost_for_unit(unit)
@@ -39,6 +36,10 @@ class IdleCrystal::Production::ProductionBuilding
 
   def build
     @amount += 1
+  end
+
+  def to_s_list
+    "#{build_key}: #{name} - #{amount} (next #{cost_for_next.to_short_s})"
   end
 
   getter :name, :amount, :build_key

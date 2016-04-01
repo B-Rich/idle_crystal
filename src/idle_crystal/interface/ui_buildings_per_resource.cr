@@ -6,6 +6,7 @@ class IdleCrystal::Interface::UiBuildingsPerResource
     @window = w
     @production = p
     @production_manager = pm
+    @resource_manager = pm.resource_manager
   end
 
   getter :production
@@ -13,14 +14,21 @@ class IdleCrystal::Interface::UiBuildingsPerResource
   def render
     @window.clear
 
-    texts = @production.buildings.map{|b| "#{b.build_key}: #{b.name} - #{b.amount} (next #{b.cost_for_next.to_short_s})"}
+    texts = @production.buildings.map{|b| b.to_s_list}
     x = 0
     y = 0
     length = texts.map{|t| t.size}.max
     max_length = @window.max_dimensions[1]
 
-    texts.each_with_index do |text, index|
-      LibNCurses.mvwprintw(@window, y, x, text)
+    @production.buildings.each_with_index do |b, index|
+      if @resource_manager.resources_pack >= b.cost_for_next
+        LibNCurses.wcolor_set(@window, IdleCrystal::Interface::Main::COLOR_GREEN, nil)
+      else
+        LibNCurses.wcolor_set(@window, IdleCrystal::Interface::Main::COLOR_RED, nil)
+      end
+      LibNCurses.mvwprintw(@window, y, x, b.to_s_list)
+      LibNCurses.wcolor_set(@window, IdleCrystal::Interface::Main::COLOR_DEFAULT, nil)
+
       y += 1
     end
 

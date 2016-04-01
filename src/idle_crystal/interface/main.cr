@@ -3,6 +3,11 @@ require "./ui_resources"
 require "./ui_buildings"
 
 class IdleCrystal::Interface::Main
+  COLOR_DEFAULT = 0
+  COLOR_GREEN = 1
+  COLOR_RED = 2
+  COLOR_BLUE = 3
+
   def initialize(civ)
     @civilization = civ
     @resources_manager = @civilization.resources_manager as IdleCrystal::ResourcesManager
@@ -11,6 +16,10 @@ class IdleCrystal::Interface::Main
     NCurses.init
     NCurses.raw
     NCurses.no_echo
+    NCurses.start_color
+
+    LibNCurses.init_pair(COLOR_GREEN, 2, 0)
+    LibNCurses.init_pair(COLOR_RED, 1, 0)
 
     @max_height, @max_width = NCurses.stdscr.max_dimensions
 
