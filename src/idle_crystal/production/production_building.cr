@@ -15,7 +15,7 @@ class IdleCrystal::Production::ProductionBuilding
   def cost_for_unit(unit)
     rp = IdleCrystal::ResourcePack.new
     @cost.keys.each do |k|
-      volume = @cost[k].to_s.to_f ** @coeff
+      volume = @cost[k].to_s.to_f * (@coeff ** unit)
       rp.volume(k.to_s, volume)
     end
 

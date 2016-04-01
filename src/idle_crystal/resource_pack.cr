@@ -32,6 +32,10 @@ class IdleCrystal::ResourcePack
     @resources
   end
 
+  def to_short_s
+    hash.keys.map{|k| "#{k}: #{hash[k]}"}.join(",")
+  end
+
   def >(other : IdleCrystal::ResourcePack)
     other.hash.keys.each do |k|
       if self.volume(k) < other.volume(k)

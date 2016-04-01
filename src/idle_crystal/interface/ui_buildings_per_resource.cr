@@ -13,7 +13,7 @@ class IdleCrystal::Interface::UiBuildingsPerResource
   def render
     @window.clear
 
-    texts = @production.buildings.map{|b| "#{b.build_key}: #{b.name} - #{b.amount}"}
+    texts = @production.buildings.map{|b| "#{b.build_key}: #{b.name} - #{b.amount} (next #{b.cost_for_next.to_short_s})"}
     x = 0
     y = 0
     length = texts.map{|t| t.size}.max
