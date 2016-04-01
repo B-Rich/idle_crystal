@@ -4,3 +4,4 @@
     food: 0.2
     wood: 0.2
   coeff: 1.1
+  build_key: c  

@@ -7,6 +7,7 @@ class IdleCrystal::Production::ProductionBuilding
     @cost = h["cost"]
     @coeff = h["coeff"].to_s.to_f
     @amount = 0 as Int32
+    @build_key = h["build_key"].to_s[0]
   end
 
   def cost_for_unit(unit)
@@ -18,5 +19,5 @@ class IdleCrystal::Production::ProductionBuilding
     return rp
   end
 
-  getter :name, :amount
+  getter :name, :amount, :build_key
 end

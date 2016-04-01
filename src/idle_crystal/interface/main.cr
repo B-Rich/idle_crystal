@@ -20,12 +20,8 @@ class IdleCrystal::Interface::Main
 
     # resources
     @ui_resources = IdleCrystal::Interface::UiResources.new(@resources, @resources_manager)
-
     # production buildings
-    @ui_buildings_modules = Hash(String, IdleCrystal::Interface::UiBuildings).new
-    @production_manager.resources.each_with_index do |key, value, index|
-      @ui_buildings_modules[key] = IdleCrystal::Interface::UiBuildings.new(@content, value)
-    end
+    @ui_buildings = IdleCrystal::Interface::UiBuildings.new(@content, @production_manager)
 
     @auto_refresh_every = 0.5
     @last_refresh = Time.now
@@ -36,19 +32,9 @@ class IdleCrystal::Interface::Main
     render_content
   end
 
-  # TODO move to external class
-  def resources_active
-    @ui_buildings_modules.values.select{|m| m.production.active }
-  end
-
-  def current_production
-    resources_active[@cursor]
-  end
-
   def max_cursor
-    resources_active.size
+    @ui_buildings.max_cursor
   end
-
 
   def auto_refresh
     if (Time.now - @last_refresh).to_f > @auto_refresh_every
@@ -66,17 +52,23 @@ class IdleCrystal::Interface::Main
 
   def render_menu
     @menu.clear
-    @menu.print("IdleCrystal - #{@cursor}")
+
+    max_length = @menu.max_dimensions[1]
+
+    text = "IdleCrystal: #{@civilization.name}"
+    LibNCurses.mvwprintw(@menu, 0, 0, text)
+
+    text = "turn #{@civilization.tick}"
+    LibNCurses.mvwprintw(@menu, 0, max_length - text.size - 1, text)
+
+    text = @ui_buildings.current_production.name
+    LibNCurses.mvwprintw(@menu, 0, (max_length - text.size) / 2, text)
+
     @menu.refresh
   end
 
   def render_content
-    # @content.clear
-    # @content.print("Content")
-    # LibNCurses.mvwprintw(@content, 4, 5, "Test")
-    # @content.refresh
-
-    current_production.render
+    @ui_buildings.render
   end
 
   def render_resources
@@ -111,14 +103,15 @@ class IdleCrystal::Interface::Main
       #  @enabled = false
     else
       # if return true, then must update
-      #result = current_module.send_key(char)
-      #refresh if result
+      result = @ui_buildings.send_key(char)
+      refresh if result
     end
   end
 
   def move_cursor(offset)
     return unless 0 <= @cursor + offset < max_cursor
     @cursor += offset
+    @ui_buildings.cursor = @cursor
   end
 
   def stop

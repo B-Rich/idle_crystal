@@ -2,4 +2,5 @@
   production: 1
   cost:
     wood: 1.0
-  coeff: 1.1  
+  coeff: 1.1
+  build_key: f

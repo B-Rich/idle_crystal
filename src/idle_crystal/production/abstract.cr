@@ -28,4 +28,8 @@ abstract class IdleCrystal::Production::Abstract
     return v
   end
 
+  def file_path
+    File.join(["data", "#{name}.yml"])
+  end
+
 end

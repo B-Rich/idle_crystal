@@ -13,4 +13,8 @@ class IdleCrystal::ProductionManager
   end
 
   getter :resources
+
+  def build(building : IdleCrystal::Production::ProductionBuilding)
+    false
+  end
 end
