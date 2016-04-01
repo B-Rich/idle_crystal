@@ -9,13 +9,14 @@ class IdleCrystal::Interface::UiResources
   def render
     @window.clear
 
-    texts = @resource_manager.resources.keys.map{|key| "#{key}: #{@resource_manager.resources[key]}"}
+    resources_hash = @resource_manager.resources_pack.hash
+    texts = resources_hash.keys.map{|key| "#{key}: #{resources_hash[key]}"}
     x = 0
     y = 0
     length = texts.map{|t| t.size}.max
     max_length = @window.max_dimensions[1]
 
-    @resource_manager.resources.each_with_index do |key, value, index|
+    resources_hash.each_with_index do |key, value, index|
       LibNCurses.mvwprintw(@window, y, x, "#{key}: #{value}")
       x += (length + 4)
       if x >= max_length

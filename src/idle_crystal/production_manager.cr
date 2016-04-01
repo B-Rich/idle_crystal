@@ -15,6 +15,15 @@ class IdleCrystal::ProductionManager
   getter :resources
 
   def build(building : IdleCrystal::Production::ProductionBuilding)
-    false
+    cost_for_next = building.cost_for_next
+
+    if @resource_manager.resources_pack > cost_for_next
+      @resource_manager.resources_pack.remove(cost_for_next)
+      building.build
+
+      return true
+    else
+      return false
+    end
   end
 end

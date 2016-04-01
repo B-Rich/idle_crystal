@@ -9,7 +9,7 @@ class IdleCrystal::Interface::UiBuildings
 
     @ui_buildings_modules = Hash(String, IdleCrystal::Interface::UiBuildingsPerResource).new
     @production_manager.resources.each_with_index do |key, value, index|
-      @ui_buildings_modules[key] = IdleCrystal::Interface::UiBuildingsPerResource.new(@content, value)
+      @ui_buildings_modules[key] = IdleCrystal::Interface::UiBuildingsPerResource.new(@content, value, @production_manager)
     end
 
   end
