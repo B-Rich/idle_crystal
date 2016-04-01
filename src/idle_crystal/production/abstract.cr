@@ -5,7 +5,11 @@ abstract class IdleCrystal::Production::Abstract
   def initialize
     @buildings = Array(IdleCrystal::Production::ProductionBuilding).new
     load_definitions_from_yaml
+
+    @active = true
   end
+
+  getter :buildings, :active
 
   abstract def file_path
 
@@ -23,4 +27,5 @@ abstract class IdleCrystal::Production::Abstract
     end
     return v
   end
+
 end

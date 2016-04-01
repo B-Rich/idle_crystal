@@ -1,10 +1,12 @@
 require "ncurses"
 require "./ui_resources"
+require "./ui_buildings"
 
 class IdleCrystal::Interface::Main
   def initialize(civ)
     @civilization = civ
     @resources_manager = @civilization.resources_manager as IdleCrystal::ResourcesManager
+    @production_manager = @civilization.production_manager as IdleCrystal::ProductionManager
 
     NCurses.init
     NCurses.raw
@@ -16,17 +18,37 @@ class IdleCrystal::Interface::Main
     @content = NCurses::Window.new(@max_height - 2, @max_width, 2, 0)
     @resources = NCurses::Window.new(2, @max_width, @max_height - 2, 0)
 
+    # resources
     @ui_resources = IdleCrystal::Interface::UiResources.new(@resources, @resources_manager)
+
+    # production buildings
+    @ui_buildings_modules = Hash(String, IdleCrystal::Interface::UiBuildings).new
+    @production_manager.resources.each_with_index do |key, value, index|
+      @ui_buildings_modules[key] = IdleCrystal::Interface::UiBuildings.new(@content, value)
+    end
 
     @auto_refresh_every = 0.5
     @last_refresh = Time.now
     @enabled = true
     @cursor = 0
-    @max_page = 5
 
     render_menu
     render_content
   end
+
+  # TODO move to external class
+  def resources_active
+    @ui_buildings_modules.values.select{|m| m.production.active }
+  end
+
+  def current_production
+    resources_active[@cursor]
+  end
+
+  def max_cursor
+    resources_active.size
+  end
+
 
   def auto_refresh
     if (Time.now - @last_refresh).to_f > @auto_refresh_every
@@ -49,10 +71,12 @@ class IdleCrystal::Interface::Main
   end
 
   def render_content
-    @content.clear
-    @content.print("Content")
-    LibNCurses.mvwprintw(@content, 4, 5, "Test")
-    @content.refresh
+    # @content.clear
+    # @content.print("Content")
+    # LibNCurses.mvwprintw(@content, 4, 5, "Test")
+    # @content.refresh
+
+    current_production.render
   end
 
   def render_resources
@@ -93,7 +117,7 @@ class IdleCrystal::Interface::Main
   end
 
   def move_cursor(offset)
-    return unless 0 <= @cursor + offset < @max_page
+    return unless 0 <= @cursor + offset < max_cursor
     @cursor += offset
   end
 
