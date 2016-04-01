@@ -25,11 +25,20 @@ class IdleCrystal::Interface::Main
 
     @auto_refresh_every = 0.5
     @last_refresh = Time.now
+
+    @tick_every = 1.0
+    @last_tick = Time.now
+
     @enabled = true
     @cursor = 0
 
     render_menu
     render_content
+  end
+
+  def next_tick!
+    @last_tick = Time.now
+    @civilization.next_tick
   end
 
   def max_cursor
@@ -39,6 +48,12 @@ class IdleCrystal::Interface::Main
   def auto_refresh
     if (Time.now - @last_refresh).to_f > @auto_refresh_every
       refresh
+    end
+  end
+
+  def next_tick
+    if (Time.now - @last_tick).to_f > @tick_every
+      next_tick!
     end
   end
 
@@ -82,6 +97,7 @@ class IdleCrystal::Interface::Main
       while @enabled
         wait_for_input
         auto_refresh
+        next_tick
         sleep 0.03
       end
     #end

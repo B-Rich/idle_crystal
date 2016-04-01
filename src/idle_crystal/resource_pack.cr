@@ -9,7 +9,11 @@ class IdleCrystal::ResourcePack
   end
 
   def volume(name : String)
-    @resources[name]
+    if @resources.has_key?(name)
+      return @resources[name]
+    else
+      return 0.0
+    end
   end
 
   def add(name : String, value : Float64)
@@ -57,5 +61,11 @@ class IdleCrystal::ResourcePack
       remove(k, other.hash[k])
     end
     self
+  end
+
+  def clear
+    hash.keys.each do |k|
+      hash.delete(k)
+    end
   end
 end

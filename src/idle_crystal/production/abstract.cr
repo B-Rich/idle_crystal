@@ -20,12 +20,15 @@ abstract class IdleCrystal::Production::Abstract
     end
   end
 
-  def per_tick
-    v = 0.0
+
+  def produce : IdleCrystal::ResourcePack
+    rp = IdleCrystal::ResourcePack.new
+
     @buildings.each do |b|
-      v += v[1] * b[2].to_f
+      rp.add(b.produce)
     end
-    return v
+
+    return rp
   end
 
   def file_path

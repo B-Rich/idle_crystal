@@ -10,6 +10,11 @@ class IdleCrystal::Civilization
     @production_manager = IdleCrystal::ProductionManager.new(@resources_manager)
   end
 
+  def next_tick
+    @tick += 1
+    @production_manager.next_tick
+  end
+
   getter :resources_manager, :production_manager, :name, :tick
 
 end

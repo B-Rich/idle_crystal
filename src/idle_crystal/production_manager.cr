@@ -26,4 +26,11 @@ class IdleCrystal::ProductionManager
       return false
     end
   end
+
+  def next_tick
+    @resource_manager.tick_start
+    @resources.values.each do |r|
+      @resource_manager.add_from_production( r.produce )
+    end
+  end
 end
