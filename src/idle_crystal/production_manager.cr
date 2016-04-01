@@ -14,6 +14,6 @@ class IdleCrystal::ProductionManager
 
   YAML.mapping({
     food: IdleCrystal::Production::Food,
-    wood: IdleCrystal::Production::Wood
+    wood: IdleCrystal::Production::Wood,
   })
 end

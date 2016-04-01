@@ -10,9 +10,4 @@ class IdleCrystal::Civilization
 
   getter :resources_manager, :production_manager, :name
 
-  YAML.mapping({
-    name: String
-    #resources_manager: IdleCrystal::ResourcesManager,
-    #production_manager:  IdleCrystal::ProductionManager,
-  })
 end
