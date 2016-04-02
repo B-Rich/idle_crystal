@@ -1,8 +1,8 @@
 require "ncurses"
-require "../production/abstract"
+require "../production/resource"
 
 class IdleCrystal::Interface::UiBuildingsPerResource
-  def initialize(w : NCurses::Window, p : IdleCrystal::Production::Abstract, pm : IdleCrystal::ProductionManager)
+  def initialize(w : NCurses::Window, p : IdleCrystal::Production::Resource, pm : IdleCrystal::Production::Manager)
     @window = w
     @production = p
     @production_manager = pm
@@ -50,7 +50,7 @@ class IdleCrystal::Interface::UiBuildingsPerResource
 
   def send_key(char)
     building = find_building_for_build_key(char)
-    if building.is_a?(IdleCrystal::Production::ProductionBuilding)
+    if building.is_a?(IdleCrystal::Production::Building)
       return @production_manager.build(building)
     else
       return false

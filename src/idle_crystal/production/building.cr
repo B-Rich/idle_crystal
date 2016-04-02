@@ -1,6 +1,6 @@
 require "../resource_pack"
 
-class IdleCrystal::Production::ProductionBuilding
+class IdleCrystal::Production::Building
   def initialize(h : YAML::Any)
     @name = h["name"]
     @cost = h["cost"].as_h
@@ -39,7 +39,7 @@ class IdleCrystal::Production::ProductionBuilding
   end
 
   def to_s_list
-    "#{build_key}: #{name} - #{amount} (next #{cost_for_next.to_short_s})"
+    "#{build_key}: #{name} - #{amount} (cost #{cost_for_next.to_short_s}, produce #{produce.to_short_s})"
   end
 
   getter :name, :amount, :build_key

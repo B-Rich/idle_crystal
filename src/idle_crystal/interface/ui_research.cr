@@ -1,8 +1,8 @@
 require "ncurses"
 require "./ui_buildings_per_resource"
 
-class IdleCrystal::Interface::UiBuildings
-  def initialize(w : NCurses::Window, pm : IdleCrystal::Production::Manager)
+class IdleCrystal::Interface::UiResearch
+  def initialize(w : NCurses::Window, pm : IdleCrystal::ProductionManager)
     @production_manager = pm
     @content = w
     @cursor = 0 as Int32

@@ -1,0 +1,5 @@
+- name: bronze_age
+  cost:
+    food: 1000.0
+    wood: 1000.0
+    work_force: 1000.0

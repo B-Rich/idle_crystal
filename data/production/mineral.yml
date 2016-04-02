@@ -1,0 +1,21 @@
+- name: Hole
+  cost:
+    food: 10.0
+    wood: 20.0
+    work_force: 10.0
+  produce:
+    copper: 1.0
+  coeff: 1.6
+  build_key: h
+
+- name: Mine
+  cost:
+    food: 100.0
+    wood: 200.0
+    work_force: 400.0
+  produce:
+    copper: 10.0
+    cola: 10.0
+    iron: 10.0
+  coeff: 1.6
+  build_key: m

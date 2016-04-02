@@ -1,5 +1,5 @@
 require "./resources_manager"
-require "./production_manager"
+require "./production/manager"
 
 class IdleCrystal::Civilization
   def initialize
@@ -7,7 +7,7 @@ class IdleCrystal::Civilization
     @tick = 0_i64
 
     @resources_manager = IdleCrystal::ResourcesManager.new
-    @production_manager = IdleCrystal::ProductionManager.new(@resources_manager)
+    @production_manager = IdleCrystal::Production::Manager.new(@resources_manager)
   end
 
   def next_tick
