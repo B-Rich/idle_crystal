@@ -1,7 +1,7 @@
 require "ncurses"
 
 class IdleCrystal::Interface::UiResources
-  def initialize(w : NCurses::Window, rm : IdleCrystal::ResourcesManager)
+  def initialize(w : NCurses::Window, rm : IdleCrystal::Resource::Manager)
     @window = w
     @resource_manager = rm
   end
@@ -13,7 +13,7 @@ class IdleCrystal::Interface::UiResources
     resources_hash = resources_pack.hash
     production_resources_pack = @resource_manager.production_resources_pack
     production_resources_hash = production_resources_pack.hash
-    texts = resources_hash.keys.map{|key| "#{key}: #{resources_pack.volume(key).to_s_human} (+#{production_resources_pack.volume(key).to_s_human})"}
+    texts = resources_hash.keys.map{|key| "#{key}: #{resources_pack.get(key).to_s_human} (+#{production_resources_pack.get(key).to_s_human})"}
     x = 0
     y = 0
     length = texts.map{|t| t.size}.max

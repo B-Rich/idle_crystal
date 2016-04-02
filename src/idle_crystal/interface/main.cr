@@ -10,7 +10,7 @@ class IdleCrystal::Interface::Main
 
   def initialize(civ)
     @civilization = civ
-    @resources_manager = @civilization.resources_manager as IdleCrystal::ResourcesManager
+    @resources_manager = @civilization.resources_manager as IdleCrystal::Resource::Manager
     @production_manager = @civilization.production_manager as IdleCrystal::Production::Manager
 
     NCurses.init

@@ -1,5 +1,5 @@
 require "./utils/*"
-require "./resources_manager"
+require "./resource/manager"
 require "./production/manager"
 
 class IdleCrystal::Civilization
@@ -7,7 +7,7 @@ class IdleCrystal::Civilization
     @name = "Test"
     @tick = 0_i64
 
-    @resources_manager = IdleCrystal::ResourcesManager.new
+    @resources_manager = IdleCrystal::Resource::Manager.new
     @production_manager = IdleCrystal::Production::Manager.new(@resources_manager)
   end
 
@@ -17,10 +17,12 @@ class IdleCrystal::Civilization
   end
 
   def load
+    @resources_manager.load
     @production_manager.load
   end
 
   def save
+    @resources_manager.save
     @production_manager.save
   end
 

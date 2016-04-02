@@ -1,4 +1,4 @@
-require "../resource_pack"
+require "../resource/pack"
 
 # One type of building (belongs to resource) which produce and/or converts
 # resources to other types
@@ -13,10 +13,10 @@ class IdleCrystal::Production::Building
   end
 
   def cost_for_unit(unit)
-    rp = IdleCrystal::ResourcePack.new
+    rp = IdleCrystal::Resource::Pack.new
     @cost.keys.each do |k|
       volume = @cost[k].to_s.to_f * (@coeff ** unit)
-      rp.volume(k.to_s, volume)
+      rp.set(k.to_s, volume)
     end
 
     return rp
@@ -27,10 +27,10 @@ class IdleCrystal::Production::Building
   end
 
   def produce
-    rp = IdleCrystal::ResourcePack.new
+    rp = IdleCrystal::Resource::Pack.new
     @produce.keys.each do |k|
       volume = @produce[k].to_s.to_f * @amount
-      rp.volume(k.to_s, volume)
+      rp.set(k.to_s, volume)
     end
 
     return rp

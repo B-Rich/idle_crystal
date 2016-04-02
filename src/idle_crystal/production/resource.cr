@@ -20,8 +20,8 @@ class IdleCrystal::Production::Resource
     end
   end
 
-  def produce : IdleCrystal::ResourcePack
-    rp = IdleCrystal::ResourcePack.new
+  def produce : IdleCrystal::Resource::Pack
+    rp = IdleCrystal::Resource::Pack.new
 
     @buildings.each do |b|
       rp.add(b.produce)
