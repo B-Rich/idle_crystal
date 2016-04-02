@@ -1,6 +1,7 @@
 require "yaml"
 require "./building"
 
+# Store all building related to one type of source
 class IdleCrystal::Production::Resource
   def initialize(n : String)
     @name = n

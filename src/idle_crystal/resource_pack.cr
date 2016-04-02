@@ -37,7 +37,7 @@ class IdleCrystal::ResourcePack
   end
 
   def to_short_s
-    hash.keys.map{|k| "#{k}: #{hash[k]}"}.join(", ")
+    hash.keys.map{|k| "#{k}: #{hash[k].to_s_human}"}.join(", ")
   end
 
   def >=(other : IdleCrystal::ResourcePack)
@@ -48,8 +48,8 @@ class IdleCrystal::ResourcePack
     return ( (self<=>other) > 0)
   end
 
-
   def <=>(other : IdleCrystal::ResourcePack)
+    # TODO return 0 only if all volumes are equal
     other.hash.keys.each do |k|
       if self.volume(k) < other.volume(k)
         return -1

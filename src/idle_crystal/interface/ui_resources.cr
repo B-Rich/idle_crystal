@@ -13,7 +13,7 @@ class IdleCrystal::Interface::UiResources
     resources_hash = resources_pack.hash
     production_resources_pack = @resource_manager.production_resources_pack
     production_resources_hash = production_resources_pack.hash
-    texts = resources_hash.keys.map{|key| "#{key}: #{resources_pack.volume(key)} (+#{production_resources_pack.volume(key)})"}
+    texts = resources_hash.keys.map{|key| "#{key}: #{resources_pack.volume(key).to_s_human} (+#{production_resources_pack.volume(key).to_s_human})"}
     x = 0
     y = 0
     length = texts.map{|t| t.size}.max

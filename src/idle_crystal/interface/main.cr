@@ -109,6 +109,8 @@ class IdleCrystal::Interface::Main
         next_tick
         sleep 0.03
       end
+
+      stop
     #end
   end
 
@@ -140,6 +142,8 @@ class IdleCrystal::Interface::Main
   end
 
   def stop
+    @civilization.save
+
     NCurses.end_win
   end
 end

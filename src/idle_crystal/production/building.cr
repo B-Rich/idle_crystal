@@ -1,5 +1,7 @@
 require "../resource_pack"
 
+# One type of building (belongs to resource) which produce and/or converts
+# resources to other types
 class IdleCrystal::Production::Building
   def initialize(h : YAML::Any)
     @name = h["name"]
@@ -36,6 +38,10 @@ class IdleCrystal::Production::Building
 
   def build
     @amount += 1
+  end
+
+  def amount_from_load(a : Int32)
+    @amount = a
   end
 
   def to_s_list

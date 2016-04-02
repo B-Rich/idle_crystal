@@ -1,3 +1,4 @@
+require "./utils/*"
 require "./resources_manager"
 require "./production/manager"
 
@@ -13,6 +14,14 @@ class IdleCrystal::Civilization
   def next_tick
     @tick += 1
     @production_manager.next_tick
+  end
+
+  def load
+    @production_manager.load
+  end
+
+  def save
+    @production_manager.save
   end
 
   getter :resources_manager, :production_manager, :name, :tick
