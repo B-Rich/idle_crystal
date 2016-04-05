@@ -1,7 +1,7 @@
 require "./abstract_content"
 
 class IdleCrystal::Interface::ContentBuilding < IdleCrystal::Interface::AbstractContent
-  LINES_PER_BUILDING = 3
+  LINES_PER_BUILDING = 5
 
   def initialize(w : NCurses::Window, p : IdleCrystal::Production::Resource, pm : IdleCrystal::Production::Manager)
     @window = w
@@ -53,11 +53,7 @@ class IdleCrystal::Interface::ContentBuilding < IdleCrystal::Interface::Abstract
 
     buildings = buildings_for_page(page)
 
-    texts = buildings.map{|b| b.to_s_list}
-    x = 0
     y = 0
-    length = texts.map{|t| t.size}.max
-    max_length = @window.max_dimensions[1]
 
     buildings.each_with_index do |b, index|
       if @resource_manager.resources_pack >= b.cost_for_next
@@ -65,7 +61,10 @@ class IdleCrystal::Interface::ContentBuilding < IdleCrystal::Interface::Abstract
       else
         LibNCurses.wcolor_set(@window, IdleCrystal::Interface::Main::COLOR_RED, nil)
       end
-      LibNCurses.mvwprintw(@window, y, x, b.to_s_list)
+      LibNCurses.mvwprintw(@window, y, 0, b.to_s_list)
+      LibNCurses.mvwprintw(@window, y + 1, 3, "cost: #{b.cost_for_next.to_short_s}")
+      LibNCurses.mvwprintw(@window, y + 2, 3, "produce: #{b.produce.to_short_s}")
+
       LibNCurses.wcolor_set(@window, IdleCrystal::Interface::Main::COLOR_DEFAULT, nil)
 
       y += LINES_PER_BUILDING

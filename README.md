@@ -7,9 +7,10 @@ Civ building idle game. From stone age to whole universe civilization.
 * optional web interface
 * multiple threads: backend, interface, web
 
-Roadmap
--------
+Roadmap/TODO
+------------
 
+[ ] building interface - show cost,production,efectiveness
 [ ] easily definiable resources and production buildings
 [ ] refactor to change names to be more meaningful
 [ ] convert production tabs to allow add other type of tabs like research

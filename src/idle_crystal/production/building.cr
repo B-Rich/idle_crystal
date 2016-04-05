@@ -45,7 +45,8 @@ class IdleCrystal::Production::Building
   end
 
   def to_s_list
-    "#{build_key}: #{name} - #{amount} (cost #{cost_for_next.to_short_s}, produce #{produce.to_short_s})"
+    #  (cost #{cost_for_next.to_short_s}, produce #{produce.to_short_s})
+    "#{build_key}: #{name} - amount:  #{amount}"
   end
 
   getter :name, :amount, :build_key
