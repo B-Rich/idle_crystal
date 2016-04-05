@@ -17,6 +17,10 @@ class IdleCrystal::Interface::Menu
     LibNCurses.mvwprintw(@menu, 0, max_length - text.size - 1, text)
 
     text = @content_manager.current_tab.name
+    if @content_manager.current_tab.max_page_cursor > 0
+      text += " (#{@content_manager.current_page_cursor + 1}/#{@content_manager.max_page_cursor + 1})"
+    end
+
     LibNCurses.mvwprintw(@menu, 0, (max_length - text.size) / 2, text)
 
     @menu.refresh

@@ -27,6 +27,10 @@ class IdleCrystal::Interface::ContentManager
     @content_tabs.size - 1
   end
 
+  def current_page_cursor
+    @page_cursor
+  end
+
   def max_page_cursor
     current_tab.max_page_cursor
   end
@@ -34,12 +38,14 @@ class IdleCrystal::Interface::ContentManager
   def prev_tab
     if @tab_cursor > 0
       @tab_cursor -= 1
+      @page_cursor = 0
     end
   end
 
   def next_tab
     if @tab_cursor < max_tab_cursor
       @tab_cursor += 1
+      @page_cursor = 0
     end
   end
 
@@ -56,6 +62,6 @@ class IdleCrystal::Interface::ContentManager
   end
 
   def render
-    current_tab.render
+    current_tab.render(@page_cursor)
   end
 end

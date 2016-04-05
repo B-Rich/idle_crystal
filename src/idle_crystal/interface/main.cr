@@ -112,10 +112,10 @@ class IdleCrystal::Interface::Main
     when 67
       @content_manager.next_tab
       refresh
-    when 66
+    when 65
       @content_manager.prev_page
       refresh
-    when 69
+    when 66
       @content_manager.next_page
       refresh
 
