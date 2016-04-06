@@ -6,6 +6,7 @@
     work_force: 0.2
   coeff: 1.6
   build_key: c
+  milestone: 0
 
 - name: Primitive hut
   cost:
@@ -16,6 +17,7 @@
     work_force: 5.0
   coeff: 1.4
   build_key: h
+  milestone: 1
 
 - name: Hunter hut
   cost:
@@ -27,7 +29,8 @@
     work_force: 1.0
   coeff: 1.3
   build_key: h
-
+  milestone: 2
+  
 - name: Wooden house
   cost:
     work_force: 15.0
@@ -38,3 +41,4 @@
     work_force: 6.0
   coeff: 1.3
   build_key: w
+  milestone: 3

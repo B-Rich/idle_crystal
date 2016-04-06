@@ -47,7 +47,7 @@ class IdleCrystal::Interface::ContentResearch < IdleCrystal::Interface::Abstract
   end
 
   def name
-    "research"
+    "research (#{@research_manager.tech_level})"
   end
 
   def techs_for_page(page : Int32)

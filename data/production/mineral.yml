@@ -7,6 +7,7 @@
     copper: 1.0
   coeff: 1.6
   build_key: h
+  milestone: 0
 
 - name: Quarry
   cost:
@@ -19,6 +20,7 @@
     iron: 10.0
   coeff: 1.6
   build_key: m
+  milestone: 0
 
 - name: Mine
   cost:
@@ -31,3 +33,4 @@
     iron: 10.0
   coeff: 1.6
   build_key: m
+  milestone: 1

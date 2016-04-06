@@ -3,13 +3,14 @@ require "./abstract_content"
 class IdleCrystal::Interface::ContentBuilding < IdleCrystal::Interface::AbstractContent
   LINES_PER_BUILDING = 5
 
-  def initialize(w : NCurses::Window, p : IdleCrystal::Production::Resource, pm : IdleCrystal::Production::Manager)
+  def initialize(w : NCurses::Window, p : IdleCrystal::Production::Resource, pm : IdleCrystal::Production::Manager, rm : IdleCrystal::Research::Manager)
     @window = w
     @max_height, @max_width = @window.max_dimensions
 
     @production = p
     @production_manager = pm
     @resources_manager = pm.resources_manager
+    @research_manager = rm
   end
 
   def buildings_per_page
@@ -44,8 +45,12 @@ class IdleCrystal::Interface::ContentBuilding < IdleCrystal::Interface::Abstract
     @production.name
   end
 
+  def available_buildings
+    @production.buildings.select{|b| @research_manager.can_you_build?(b)}
+  end
+
   def buildings_for_page(page : Int32)
-    @production.buildings[(buildings_per_page * page), (buildings_per_page * (page+1))]
+    available_buildings.[(buildings_per_page * page), (buildings_per_page * (page+1))]
   end
 
   def render(page)

@@ -10,7 +10,11 @@ class IdleCrystal::Production::Building
     @coeff = h["coeff"].to_s.to_f
     @amount = 0 as Int32
     @build_key = h["build_key"].to_s[0]
+    @milestone = 0
+    @milestone = h["milestone"].to_s.to_i if h["milestone"]?
   end
+
+  getter :name, :amount, :build_key, :milestone
 
   def cost_for_unit(unit)
     rp = IdleCrystal::Resource::Pack.new
@@ -53,5 +57,5 @@ class IdleCrystal::Production::Building
     "#{build_key}: #{name} - amount: #{amount}"
   end
 
-  getter :name, :amount, :build_key
+
 end

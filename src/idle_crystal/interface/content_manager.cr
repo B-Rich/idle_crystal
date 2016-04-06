@@ -9,14 +9,15 @@ class IdleCrystal::Interface::ContentManager
     @page_cursor = 0
 
     @production_manager = @civilization.production_manager
+    @research_manager = @civilization.research_manager
 
     @content_tabs = Array(IdleCrystal::Interface::AbstractContent).new
 
     @content_tabs << IdleCrystal::Interface::ContentResearch.new(@content, @civilization)
     @production_manager.resources.each_with_index do |key, value, index|
-      @content_tabs << IdleCrystal::Interface::ContentBuilding.new(@content, value, @production_manager)
+      @content_tabs << IdleCrystal::Interface::ContentBuilding.new(@content, value, @production_manager, @research_manager)
     end
-    
+
   end
 
   def current_tab

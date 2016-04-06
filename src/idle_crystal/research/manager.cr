@@ -31,6 +31,14 @@ class IdleCrystal::Research::Manager
     end
   end
 
+  def tech_level
+    @techs.select{|t| t.milestone?}.map{|t| t.milestone}.max
+  end
+
+  def can_you_build?(building : IdleCrystal::Production::Building)
+    building.milestone <= tech_level
+  end
+
   def next_tick
     @resource_manager.tick_start
     @resources.values.each do |r|

@@ -7,6 +7,7 @@
     science: 1.0
   coeff: 1.5
   build_key: t
+  milestone: 0
 
 - name: Acadamy
   cost:
@@ -17,6 +18,7 @@
     science: 50.0
   coeff: 1.4
   build_key: a
+  milestone: 1
 
 - name: University
   cost:
@@ -27,6 +29,7 @@
     science: 200.0
   coeff: 1.38
   build_key: u
+  milestone: 2
 
 - name: Laboratory
   cost:
@@ -38,3 +41,4 @@
     science: 1000.0
   coeff: 1.36
   build_key: l
+  milestone: 3

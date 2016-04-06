@@ -5,15 +5,16 @@ class IdleCrystal::Research::Tech
     @research_key = h["research_key"].to_s[0]
     @coeff = 1.1
     @coeff = h["coeff"].to_s.to_f if h["coeff"]?
-    @milestone = false
+    @milestone = 0
     if h["milestone"]?
-      @milestone = (h["milestone"].to_s == "true")
+      @milestone = h["milestone"].to_s.to_i
     end
+    @tech_level =
 
     @level = 0 as Int32
   end
 
-  getter :level, :name, :research_key
+  getter :level, :name, :research_key, :milestone
 
   def set_level(l : Int32)
     @level = l
@@ -48,8 +49,12 @@ class IdleCrystal::Research::Tech
     return s
   end
 
+  def milestone?
+    (@milestone > 0)
+  end
+
   def enabled?
-    if @level > 0 && @milestone
+    if @level > 0 && milestone?
       return false
     end
     return true
