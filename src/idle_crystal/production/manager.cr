@@ -3,11 +3,11 @@ require "yaml"
 
 # Store all types of resources and perform production
 class IdleCrystal::Production::Manager
-  RESOURCES_LIST_PATH = File.join(["data", "resources_list.yml"])
+  RESOURCES_LIST_PATH = File.join(["data", "production_list.yml"])
   SAVE_FILE_PATH = File.join(["save", "production.yml"])
 
   def initialize(rm)
-    @resource_manager = rm
+    @resources_manager = rm
     @resource_names = Array(String).new
     YAML.parse(File.read(RESOURCES_LIST_PATH)).as_a.each do |r|
       @resource_names << r.to_s
@@ -20,13 +20,13 @@ class IdleCrystal::Production::Manager
     end
   end
 
-  getter :resources, :resource_manager
+  getter :resources, :resources_manager
 
   def build(building : IdleCrystal::Production::Building)
     cost_for_next = building.cost_for_next
 
-    if @resource_manager.resources_pack > cost_for_next
-      @resource_manager.resources_pack.remove(cost_for_next)
+    if @resources_manager.resources_pack > cost_for_next
+      @resources_manager.resources_pack.remove(cost_for_next)
       building.build
 
       return true
@@ -36,9 +36,9 @@ class IdleCrystal::Production::Manager
   end
 
   def next_tick
-    @resource_manager.tick_start
+    @resources_manager.tick_start
     @resources.values.each do |r|
-      @resource_manager.add_from_production( r.produce )
+      @resources_manager.add_from_production( r.produce )
     end
   end
 
