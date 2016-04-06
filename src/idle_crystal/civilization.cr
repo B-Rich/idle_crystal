@@ -21,11 +21,13 @@ class IdleCrystal::Civilization
   def load
     @resources_manager.load
     @production_manager.load
+    @research_manager.load
   end
 
   def save
     @resources_manager.save
     @production_manager.save
+    @research_manager.save
   end
 
   getter :resources_manager, :production_manager, :research_manager, :name, :tick

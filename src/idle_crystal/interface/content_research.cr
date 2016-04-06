@@ -51,7 +51,7 @@ class IdleCrystal::Interface::ContentResearch < IdleCrystal::Interface::Abstract
   end
 
   def techs_for_page(page : Int32)
-    @techs[(techs_per_page * page), (techs_per_page * (page+1))]
+    @techs.select{|t| t.enabled?}.[(techs_per_page * page), (techs_per_page * (page+1))]
   end
 
   def render(page)

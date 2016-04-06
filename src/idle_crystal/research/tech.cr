@@ -1,6 +1,6 @@
 class IdleCrystal::Research::Tech
   def initialize(h : YAML::Any)
-    @name = h["name"]
+    @name = h["name"].to_s
     @cost = h["cost"].as_h
     @research_key = h["research_key"].to_s[0]
     @coeff = 1.1
@@ -20,6 +20,8 @@ class IdleCrystal::Research::Tech
   end
 
   def research
+    return unless enabled?
+
     @level += 1
   end
 

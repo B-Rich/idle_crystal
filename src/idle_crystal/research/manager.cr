@@ -40,6 +40,7 @@ class IdleCrystal::Research::Manager
 
   def find_by_name(n : String)
     a = @techs.select{|t| t.name == n}
+
     if a.size > 0
       return a.first
     else
@@ -49,8 +50,8 @@ class IdleCrystal::Research::Manager
 
   def save
     h = Hash(String, Int32).new
-    @techs.each do |k|
-      h[k] = @techs[k].level
+    @techs.each do |tech|
+      h[tech.name] = tech.level
     end
 
     File.open(SAVE_FILE_PATH, "w") { |f| YAML.dump(h, f) }
@@ -61,7 +62,7 @@ class IdleCrystal::Research::Manager
     h = YAML.parse(File.read(SAVE_FILE_PATH)).as_h
 
     h.keys.each do |k|
-      tech = find_by_name(k)
+      tech = find_by_name(k.to_s)
       if tech.nil?
         # nothing
       else
