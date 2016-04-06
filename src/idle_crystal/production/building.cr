@@ -26,14 +26,18 @@ class IdleCrystal::Production::Building
     cost_for_unit(@amount + 1)
   end
 
-  def produce
+  def produce_per_units(unit = 1)
     rp = IdleCrystal::Resource::Pack.new
     @produce.keys.each do |k|
-      volume = @produce[k].to_s.to_f * @amount
+      volume = @produce[k].to_s.to_f * unit.to_f
       rp.set(k.to_s, volume)
     end
 
     return rp
+  end
+
+  def produce
+    produce_per_units(@amount)
   end
 
   def build

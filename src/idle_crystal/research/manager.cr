@@ -18,12 +18,12 @@ class IdleCrystal::Research::Manager
 
   getter :techs
 
-  def build(building : IdleCrystal::Production::Building)
-    cost_for_next = building.cost_for_next
+  def research(tech : IdleCrystal::Research::Tech)
+    cost_for_next = tech.cost_for_next
 
     if @resource_manager.resources_pack > cost_for_next
       @resource_manager.resources_pack.remove(cost_for_next)
-      building.build
+      tech.research
 
       return true
     else

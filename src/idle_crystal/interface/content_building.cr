@@ -72,7 +72,7 @@ class IdleCrystal::Interface::ContentBuilding < IdleCrystal::Interface::Abstract
     LibNCurses.mvwprintw(@window, y, 0, building.to_s_list)
     LibNCurses.wcolor_set(@window, IdleCrystal::Interface::Main::COLOR_DEFAULT, nil)
 
-    render_building_table(building, y)
+    IdleCrystal::Interface::Helper.render_building_table(building, @window, 2, y + 1)
   end
 
   def render_building_table(building, y)

@@ -1,9 +1,9 @@
 require "ncurses"
-require "./menu"
-require "./content_manager"
 
-require "./ui_resources"
-require "./ui_buildings"
+require "./helper"
+require "./menu"
+require "./resources"
+require "./content_manager"
 
 
 class IdleCrystal::Interface::Main
@@ -12,7 +12,7 @@ class IdleCrystal::Interface::Main
   COLOR_RED = 2
   COLOR_BLUE = 3
 
-  RESOURCES_HEIGHT = 2
+  RESOURCES_HEIGHT = 3
 
   def initialize(civ)
     @civilization = civ
@@ -32,16 +32,8 @@ class IdleCrystal::Interface::Main
     @max_height, @max_width = @window.max_dimensions
     @content_manager = IdleCrystal::Interface::ContentManager.new(@civilization, @max_width, @max_height)
     @menu = IdleCrystal::Interface::Menu.new(@civilization, @content_manager, @max_width)
+    @resources = IdleCrystal::Interface::Resources.new(@resources_manager)
 
-
-    #########3
-    #@content = NCurses::Window.new(@max_height - 2, @max_width, 2, 0)
-    @resources = NCurses::Window.new(2, @max_width, @max_height - 2, 0)
-
-    # resources
-    @ui_resources = IdleCrystal::Interface::UiResources.new(@resources, @resources_manager)
-    # production buildings
-    #@ui_buildings = IdleCrystal::Interface::UiBuildings.new(@content, @production_manager)
 
     @auto_refresh_every = 0.5
     @last_refresh = Time.now
@@ -86,7 +78,7 @@ class IdleCrystal::Interface::Main
   end
 
   def render_resources
-    @ui_resources.render
+    @resources.render
   end
 
   def start_interface

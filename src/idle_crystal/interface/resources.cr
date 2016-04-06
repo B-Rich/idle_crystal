@@ -1,9 +1,17 @@
 require "ncurses"
 
-class IdleCrystal::Interface::UiResources
-  def initialize(w : NCurses::Window, rm : IdleCrystal::Resource::Manager)
-    @window = w
+class IdleCrystal::Interface::Resources
+  def initialize(rm : IdleCrystal::Resource::Manager)
+    @screen = NCurses.stdscr
+    @max_height, @max_width = @screen.max_dimensions
+
     @resource_manager = rm
+    @window = NCurses::Window.new(
+      IdleCrystal::Interface::Main::RESOURCES_HEIGHT,
+      @max_width,
+      @max_height - IdleCrystal::Interface::Main::RESOURCES_HEIGHT,
+      0
+    )
   end
 
   def render

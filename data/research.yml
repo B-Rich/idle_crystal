@@ -3,4 +3,5 @@
     food: 1000.0
     wood: 1000.0
     work_force: 1000.0
-  research_key: '1'  
+  research_key: '1'
+  milestone: true
